@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title>Password Checker</title>
+    <script src="ContraSegur-main/js/zxcvbn.js" type="text/javascript"></script>
+    <script>
+        function Iniciar() {
+            var password = document.getElementById("pwd").value;
+            window.alert("Password: " + password);
+            Comprovar(password); 
+        }
+
+        function Comprovar(password) {
+          
+             var password = document.getElementById("password").value;
+                
+                document.getElementById("minicar").checked = false;
+                document.getElementById("uppercase").checked = false;
+                document.getElementById("lowecase").checked = false;
+                document.getElementById("number").checked = false;
+                document.getElementById("special").checked = false;
+            
+            // List of special characters 
+            const specialChars = "ñçÑÇ!@#$%^&*(),.?:{}|<>";
+
+            // Loop through each character in password
+            for (var i = 0; i < password.length; i++) {
+                var char = password.charAt(i);
+                
+                // Check if character is a number
+                if (!isNaN(char) && char !== ' ') {
+                    hasNumber = true;
+                }
+                
+                // Check if character is uppercase
+                if (char === char.toUpperCase() && isNaN(char)) {
+                    hasUppercase = true;
+                }
+
+                // Check if character is lowercase
+                if (char === char.toLowerCase() && isNaN(char)) {
+                    hasLowercase = true;
+                }
+
+                // Check if character is a special character
+                if (specialChars.includes(char)) {
+                    hasSpecial = true;
+                }
+            }
+            
+            // Update checkboxes based on password properties
+            document.getElementById("number").checked = hasNumber;
+            document.getElementById("uppercase").checked = hasUppercase;
+            document.getElementById("lowercase").checked = hasLowercase;
+            document.getElementById("special").checked = hasSpecial;
+
+            // Calculate password strength
+            var base = 0;
+            var exponente = password.length; // Use password length for exponent
+            
+            var base = 0;
+            if (document.getElementById("number").checked) { base = 10; }
+            if (document.getElementById("uppercase").checked) { base = 40; } 
+            if (document.getElementById("lowercase").checked) { base = 40; } 
+            if (document.getElementById("special").checked) { base = 41; } 
+
+            // Calculate computational cost
+            CostComputacional = Math.pow(base, exponente) / 1e6; 
+            nivel = (base * exponente) / 16;
+
+            // Display password strength
+            window.alert("Password strength level: " + nivel);
+         
+             result = zxcvbn(password);
+            
+             
+             AnysProcessament = CostComputacional / (60 * 60 * 24 * 365); // Convert to years
+             DiesProcessament = CostComputacional / (60 * 60 * 24); // Convert to days
+             
+            
+            window.alert("Password: " + password + "\n" +
+                "- " + nivel + "\n" +
+                "Tendria un Cost Computacional per Força Bruta de: " + CostComputacional.toExponential() + 
+                " pel que una maquina a 1 MIPS podria arribar a necessitar " + AnysProcessament.toExponential() + 
+                " anys de processament, es a dir, " + DiesProcessament.toExponential() +  " dies.\n" +
+                " Tendria un Nivell de Robustesa de: " + result.score + "/4, i un zxcvbn Score de: " + result.score + "/4.");   
+              
+                if (CostComputacional < 1e10)  {nivel_robustes=4;}
+            else if (CostComputacional < 1e3)  {nivel_robustes=0 ;}
+            else if (CostComputacional < 1e6)  {nivel_robustes=1;}
+            else if (CostComputacional < 1e8)  {nivel_robustes=2;}
+            else if (CostComputacional < 1e10) {nivel_robustes=3;}
+            
+       
+    }    
+        function comprovanivelpassword(password) {
+    if (!document.getElementById("majuscula").checked ||
+        !document.getElementById("minuscula").checked ||
+        !document.getElementById("numero").checked) {
+        return "La contrasenya ha de contenir almenys una lletra majúscula, una minúscula i un número.";
+    }
+    if (!document.getElementById("carespecial").checked) {
+        return "La contrasenya ha de contenir almenys un caràcter especial.";
+    }
+    if (!document.getElementById("minimcar").checked) {
+        return "La contrasenya és massa curta. Ha de tenir almenys 8 caràcters.";
+    }
+    
+    return "Contrasenya robusta!";
+}
+     
+        
+        
+    
+    </script>
+</head>
+
+<body>
+    <img src="logo-centre.jpg" alt="Logo" style="width:150px;"/>
+    
+    <form>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="pwd">Password:</label><br>
+        <input type="password" id="pwd" onchange="Comprovar(this.value);" required><br> 
+    </form>
+    
+    <button id="IniciarButton" onclick="Iniciar();">Iniciar sesión</button><br>
+
+    <!-- Checkboxes for password requirements -->
+    <br><input type="checkbox" id="minicar" > Mínim 8 caràcters<br> 
+    <input type="checkbox" id="uppercase" > Almenys una lletra majúscula<br>
+    <input type="checkbox" id="lowercase" > Almenys una lletra minúscula<br>
+    <input type="checkbox" id="number" > Almenys un número<br>
+    <input type="checkbox" id="special" > Almenys un caràcter especial<br>
+
+    <p>Dèbil - Regular - Bona - Forta</p>
+    <p>Weak - So-so - Great! - Strong</p>
+</body>
+</html>
