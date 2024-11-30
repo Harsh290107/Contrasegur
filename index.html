@@ -91,12 +91,13 @@
              DiesProcessament = CostComputacional / (60 * 60 * 24); // Convert to days
              
             
-              window.alert("Password: " + password + "\n" +
-                "- Nivel Robustesa: " + nivel_robustes + "\n" +
-                "Tendria un Cost Computacional per Força Bruta de: " + CostComputacional.toExponential() + 
-                " pel que una maquina a 1 MIPS podria arribar a necessitar " + AnysProcessament.toExponential() + 
-                " anys de processament, es a dir, " + DiesProcessament.toExponential() +  " dies.\n" +
-                " Tendria un Nivell de Robustesa de: " + result.score + "/4, i un zxcvbn Score de: " + zxcvbnScore + "/4.");
+            window.alert("Password: " + password + "\n" +
+    "- Robustness Level: " + nivel_robustes + "\n" +
+    "It would have a Computational Cost for Brute Force of: " + CostComputacional.toExponential() + 
+    ", meaning a machine operating at 1 MIPS could take up to " + AnysProcessament.toExponential() + 
+    " years of processing, or approximately " + DiesProcessament.toExponential() + " days.\n" +
+    " It would have a Robustness Level of: " + result.score + "/4, and a zxcvbn Score of: " + zxcvbnScore + "/4.");
+
         }
                 
              function comprovanivelpassword() {
