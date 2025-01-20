@@ -181,7 +181,15 @@
         
         <br><button type="button" onclick="table();">Show taulaASCII </button><br>
 
-          <p>Designed by Harshdeep singh</p>
+     <input type ="file" id="diccionari"/> <br>
+  <input type ="file" id="patrons"/> <br>
+  
+  <script type="text/javascript">
+      
+      document.getElementById('diccionari').addEventListener('change',readSingleFile , false );
+      document.getElementById('patrons').addEventListener('change',readSingleFile , false );
+      </script>
+      
 </div>
 
      <div id="Teclat" translate="no"  hidden>
