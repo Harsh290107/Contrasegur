@@ -147,6 +147,22 @@
     } else { 
       alert("Failed to load file");
     }
+	        function checkfromdiccionari(password){
+      if (diccionari.includes(password)=== true);{
+      window.alert("the entered password"  + password + "is in the list of diccionari ");
+             
+  } else {
+      window.alert("the password is not in the list ");
+  } 
+  function checkfrompatterns(password){
+      if(patrons.include(password)===true);{
+          window.alert("the entered password "+password+"is in the list of patrons");
+          
+      }else {window.alert("safe password not in the list  of patrons ");}
+      
+      
+  }
+  
   }
 
   document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
