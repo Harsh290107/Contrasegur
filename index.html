@@ -4,169 +4,8 @@
     <meta charset="UTF-8"> 
     <title>Password Checker</title>
     <script src="js/zxcvbn.js" type="text/javascript"></script>
-    
-    <script>
-         function Iniciar() {
-            var password = document.getElementById('password').value;
-            window.alert("Password: " + password);
-            Comprovar(password); 
-        }
-        function Comprovar(password) {
-            // Check minimum length
-            document.getElementById("minicar").checked = (password.length >= 8);
-
-            // Initialize checks
-            var hasNumber = false;
-            var hasUppercase = false;
-            var hasLowercase = false;
-            var hasSpecial = false;
-            
-            // List of special characters 
-            const specialChars = "ñçÑÇ!@#$%^&*(),.?:{}|<>";
-
-            // Loop through each character in password
-            for (var i = 0; i < password.length; i++) {
-                var char = password.charAt(i);
-                
-                // Check if character is a number
-                if (!isNaN(char) && char !== ' ') {
-                    hasNumber = true;
-                }
-                
-                // Check if character is uppercase
-                if (char === char.toUpperCase() && isNaN(char)) {
-                    hasUppercase = true;
-                }
-
-                // Check if character is lowercase
-                if (char === char.toLowerCase() && isNaN(char)) {
-                    hasLowercase = true;
-                }
-
-                // Check if character is a special character
-                if (specialChars.includes(char)) {
-                    hasSpecial = true;
-                }
-            }
-            
-            // Update checkboxes based on password properties
-            document.getElementById("number").checked = hasNumber;
-            document.getElementById("uppercase").checked = hasUppercase;
-            document.getElementById("lowercase").checked = hasLowercase;
-            document.getElementById("special").checked = hasSpecial;
-
-            // Calculate password strength
-            var base = 0;
-            var exponente = password.length; // Use password length for exponent
-            
-            var base = 0;
-            if (document.getElementById("number").checked) { base = base+10; }
-            if (document.getElementById("uppercase").checked) { base = base+40; } 
-            if (document.getElementById("lowercase").checked) { base =base + 40; } 
-            if (document.getElementById("special").checked) { base =base+41; } 
-
-            // Calculate computational cost
-            CostComputacional = Math.pow(base, exponente) / 1e6; 
-            nivel = (base * exponente) / 16;
-            document.getElementById("nivel").value=nivel.toString();
-            
-
-                
-            var nivel_robustes;
-            if (CostComputacional >= 1e10) {
-                nivel_robustes = 4;
-            } else if (CostComputacional >= 1e8) {
-                nivel_robustes = 3;
-            } else if (CostComputacional >= 1e6) {
-                nivel_robustes = 2;
-            } else if (CostComputacional >= 1e3) {
-                nivel_robustes = 1;
-            } else {
-                nivel_robustes = 0;
-            }
-             result = zxcvbn(password);
-             zxcvbnScore = result.score;
-             
-             AnysProcessament = CostComputacional / (60 * 60 * 24 * 365); // Convert to years
-             DiesProcessament = CostComputacional / (60 * 60 * 24); // Convert to days
-             
-            
-            window.alert("Password: " + password + "\n" +
-    "- Robustness Level: " + nivel_robustes + "\n" +
-    "It would have a Computational Cost for Brute Force of: " + CostComputacional.toExponential() + 
-    ", meaning a machine operating at 1 MIPS could take up to " + AnysProcessament.toExponential() + 
-    " years of processing, or approximately " + DiesProcessament.toExponential() + " days.\n" +
-    " It would have a Robustness Level of: " + result.score + "/4, and a zxcvbn Score of: " + zxcvbnScore + "/4.");
-
-        }
-                
-             function comprovanivelpassword() {
-             if (document.getElementById("uppercase").checked) {
-             return "La contrasenya ha de contenir almenys una lletra majúscula.";
-             }
-            if (document.getElementById("lowecase").checked) {
-            return "La contrasenya ha de contenir almenys una lletra minúscula.";
-    }       if (document.getElementById("number").checked) {
-            return "La contrasenya ha de contenir almenys un número.";
-          }if (document.getElementById("special").checked) {
-           return "La contrasenya ha de contenir almenys un caràcter especial.";
-    }       if (document.getElementById("minicar").checked) {
-            return "La contrasenya és massa curta. Ha de tenir almenys 8 caràcters.";
-    }
-
-    
-    return "Contrasenya robustes";
-    window.alert("password :"+ comprovanivelpassword);
- 
-}
-  function Keyboard(){
-         
-        document.getElementById("Teclat").hidden = !document.getElementById("Teclat").hidden;
-    }
-    function table (){
-        
-       document.getElementById("taulaASCII").hidden = !document.getElementById("taulaASCII").hidden; 
-    }
-      
-      function readSingleFile(evt) {
-    //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
-
-    if (f) {
-      var r = new FileReader();
-      r.onload = function(e) { 
-	      var contents = e.target.result;
-        alert( "Got the file.n" 
-              +"name: " + f.name + "n"
-              +"type: " + f.type + "n"
-              +"size: " + f.size + " bytesn"
-              + "starts with: " + contents.substr(1, contents.indexOf("n"))
-        );  
-      }
-      r.readAsText(f);
-    } else { 
-      alert("Failed to load file");
-    }
-	        function checkfromdiccionari(password){
-      if (diccionari.includes(password)=== true);{
-      window.alert("the entered password"  + password + "is in the list of diccionari ");
-             
-  } else {
-      window.alert("the password is not in the list ");
-  } 
-  function checkfrompatterns(password){
-      if(patrons.include(password)===true);{
-          window.alert("the entered password "+password+"is in the list of patrons");
-          
-      }else {window.alert("safe password not in the list  of patrons ");}
-      
-      
-  }
-  
-  }
-
-  document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
-    </script>
+    <script src="js_diccionariypatrons.js" type="text/javascript"></script>
+   
 </head>
 <body>
     
@@ -219,7 +58,8 @@
         <br><button type="button" onclick="table();">Show taulaASCII </button><br>
 
      <input type ="file" id="diccionari"/> <br>
-  <input type ="file" id="patrons"/> <br>
+      
+     <input type ="file" id="patrons"/> <br>
   
   <script type="text/javascript">
       
@@ -229,6 +69,30 @@
       
 </div>
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
      <div id="Teclat" translate="no"  hidden>
             <table id="Minus" ><strong>
                 <tr>
@@ -363,7 +227,7 @@
                   <td>
                     &nbsp;&nbsp;
                     <button id="!" style="height:20px;width:20px" onclick="document.getElementById('password').value = 
-                                document.getElementById('password').value + '!'; Comprovar();">!</button>
+                                document.getElementById('password').value + '!'; Comprovar()">!</button>
                     <button id='"' style="height:20px;width:20px" onclick="document.getElementById('password').value = 
                                 document.getElementById('password').value + '"'; Comprovar();">"</button>
                     <button id="·" style="height:20px;width:20px" onclick="document.getElementById('password').value = 
