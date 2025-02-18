@@ -6,9 +6,9 @@
  /* global contents */
 
 
-
+//var  diccionari = new Set(diccionari);
 // var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
-var diccionari = ["password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
+var diccionari = new Set(["password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
     "shadow", "master", "mustang", "michael", "pussy", "superman", "fuckyou", "121212", "killer", "trustno1", "jordan",
     "jennifer", "hunter", "buster", "soccer", "harley", "batman", "tigger", "sunshine", "iloveyou", "fuckme", "charlie",
     "thomas", "hockey", "ranger", "daniel", "starwars", "klaster", "112233", "george", "asshole", "computer", "michelle",
@@ -22,7 +22,8 @@ var diccionari = ["password", "guest", "dragon", "baseball", "football", "monkey
     "eagles", "melissa", "boomer", "booboo", "spider", "nascar", "monster", "tigers", "yellow", "gateway", "marina",
     "diablo", "bulldog", "compaq", "purple", "hardcore", "banana", "junior", "hannah", "porsche", "lakers", "iceman",
     "money", "cowboys", "london", "tennis", "ncc1701", "coffee", "scooby", "miller", "boston", "q1w2e3r4", "fuckoff",
-    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"];
+    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]);
+
 
 // var patrons = ["/123/", "/abc/", "/qwerty/"];
 var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,
@@ -146,6 +147,7 @@ function table (){
         
        document.getElementById("taulaASCII").hidden = !document.getElementById("taulaASCII").hidden; 
     }
+    var patrons = []; 
 function readSingleFile(evt) {
     // Retrieve the first (and only!) file from the FileList object
     var f = evt.target.files[0];
@@ -164,16 +166,22 @@ function readSingleFile(evt) {
 
             // Check if the file starts with "/" to determine if it’s a pattern file
             if (contents.substr(0,1) === "/") {
+                  
                  stream1 = contents.replaceAll("\r\n", ",");
                  stream2 = stream1.replaceAll("/", ""); 
                  stream3 = stream2.split(","); 
-                patrons.length = 0; 
+                 partrons = [];
                 for ( i = 0; i < stream3.length; i++) {
                     patrons[i] = new RegExp(stream3[i]); 
                 }
                 alert("Patterns loaded: " + patrons.join(", "));
             } else {
-                diccionari = contents.replaceAll("\r\n", ",");
+               
+                stream1 =contents.replaceAll("\n", ",");
+                stream2 = stream1.split(",");
+                for(i = 0; i <stream2.length ; i++){
+                    diccionari.add(stream2[i]);
+                }
                 
                 alert("Dictionary loaded: " + diccionari);
             }
@@ -192,6 +200,7 @@ function readSingleFile(evt) {
     }
     return false;
 }
+
 
 function teRepeticiones(password) {
     const repeticionesMultiples = /(.)\1{2,}/;
@@ -220,9 +229,9 @@ function comprovanivelpassword(password){
         return "the password has common patterns";
        
     }
-    if (teRepeticiones(password)){
-        return "the password contains repeticiones " ;   
-    }
+   // if (teRepeticiones(password)){
+      //  return "the password contains repeticiones " ;   
+   // }
             
      if (!document.getElementById("uppercase").checked) {
         return "The password must contain at least one uppercase letter.";
