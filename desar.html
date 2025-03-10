@@ -5,102 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Storage</title>
     <script>
-        function setCookie(cname, cvalue, exdays) {
-            const d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    function viewSaved() {
+        // Open a new window to display saved users
+        const myWindow = window.open("", "_blank", "width=350, height=350, left=15, top=235, location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
+
+        myWindow.document.open();
+        myWindow.document.write("<html><head><title>Stored Credentials</title></head>\
+            <body style='background-size: 320px 302px; background-image: url(\"img/password.png\"); background-repeat: no-repeat;'>\
+            <table border='1' style='border-collapse: collapse'>\
+            <tr><th>USERNAME OR EMAIL</th><th>PASSWORD</th></tr>");
+
+        let usersFound = false;
+        let userIndex = 1;
+
+        // Loop through stored users
+        while (getCookie("user" + userIndex) !== "") {
+            let username = getCookie("user" + userIndex);
+            let password = getCookie("pass" + userIndex);
+            myWindow.document.write("<tr><td>" + username + "</td><td>" + password + "</td></tr>");
+            usersFound = true;
+            userIndex++;
         }
 
-       function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for(let i = 0; i <ca.length; i++) {
-                  let c = ca[i];
-                  while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                  }
-                  if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                  }
+        if (!usersFound) {
+            alert("No saved users found.");
+            myWindow.close();
+            return;
+        }
+
+        myWindow.document.write("</table>\
+            <button onclick='window.close()'>Close</button>\
+            </body></html>");
+        myWindow.document.close();
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i].trim();
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function savedusers() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        if (!username || !password) {
+            alert("Please enter both username and password.");
+            return;
+        }
+
+        let userIndex = 1;
+        letfound = false;
+
+        while (getCookie("user" + userIndex) !== "") {
+            let storedUsername = getCookie("user" + userIndex);
+            let storedPassword = getCookie("pass" + userIndex);
+
+            if (storedUsername === username) {
+                found = true;
+                if (storedPassword === password) {
+                    alert("Welcome again " + username);
+                    return;
+                } else {
+                    let confirmChange = confirm("User already exists with a different password. Do you want to update it?");
+                    if (confirmChange) {
+                        setCookie("pass" + userIndex, password, 7);
+                        alert("Password updated successfully!");
+                    } else {
+                        alert("Welcome again " + username);
+                    }
+                    return;
                 }
-                return "";
-            } 
- 
+            }
+            userIndex++;
+        }
+
+        // If user not found, save new user
+        setCookie("user" + userIndex, username, 7);
+        setCookie("pass" + userIndex, password, 7);
+        alert("User saved!");
+    }
+
+    function deleteUsername() {
+    let username = document.getElementById("username").value;
+    let userIndex = 1;
     
-        function checkCookie() {
-            let username = getCookie("username");
-            if (username != "") {
-                alert("Welcome again " + username);
-            } else {
-                username = prompt("Please enter your name:", "");
-                if (username != "" && username != null) {
-                    setCookie("username", username, 365);
-                }
-            }
-        }
-               
-        function savedusers() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            
-            if (username && password) {
-                setCookie("username", username, 7);
-                setCookie("password", password, 7);
-                alert("user saved!");
-            } else {
-                alert("Please enter both username and password.");
-            }
-        }
-
-        function deleteUsername() {
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // Loop through all stored users to find the matching username
+    while (getCookie("user" + userIndex) !== "") {
+        let storedUsername = getCookie("user" + userIndex);
+        if (storedUsername === username) {
+            // Delete the username and password cookies for this user
+            document.cookie = "user" + userIndex + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "pass" + userIndex + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             document.getElementById("username").value = "";
-            alert("Username deleted from cookies.");
+            document.getElementById("password").value = "";
+            alert("Username and password deleted from cookies.");
+            return;
         }
+        userIndex++;
+    }
 
-        function viewSaved() {
-            let username = getCookie("username");
-            let password = getCookie("password");
-            
-            if (username && password) {
-                alert("Saved:\nUsername: " + username + "\nPassword: " + password);
-            } else {
-                alert("No saved users found.");
-            }
+    // If no matching username is found
+    alert("Username not found in cookies.");
+}
+
+
+    function showpassword() {
+        var x = document.getElementById("password");
+        x.type = (x.type === "password") ? "text" : "password";
+    }
+
+    function loadStoredusers() {
+        let storedUsername = localStorage.getItem("username");
+        let storedPassword = localStorage.getItem("password");
+
+        if (storedUsername) {
+            document.getElementById("username").value = storedUsername;
         }
-
-        function showpassword() {
-              var x = document.getElementById("password");
-              if (x.type === "password") {
-                x.type = "text";
-              } else {
-                x.type = "password";
-              }
-            }
-
-        function loadStoredusers() {
-            let storedUsername = localStorage.getItem("username");
-            let storedPassword = localStorage.getItem("password");
-            
-            if (storedUsername) {
-                document.getElementById("username").value = storedUsername;
-            }
-            if (storedPassword) {
-                document.getElementById("password").value = storedPassword;
-            }
+        if (storedPassword) {
+            document.getElementById("password").value = storedPassword;
         }
+    }
 
-        function saveToLocalStorage() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            localStorage.setItem("username", username);
-            localStorage.setItem("password", password);
-        }
+    function saveToLocalStorage() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+    }
 
-        window.onload = loadStoredusers;
+    window.onload = loadStoredusers;
+    
+    function Keyboard(){
+         
+        document.getElementById("Teclat").hidden = !document.getElementById("Teclat").hidden;
+    }
     </script>
+
 </head>
 <body>
     <div>Vols desar l'inici de sessió a ContraSegur?</div>
@@ -116,15 +171,15 @@
         <input type="password" id="password" oninput="saveToLocalStorage();">
         <button type="button" onclick="showpassword();">Show/Hide Password</button>
         <br>
-        <input type="checkbox" id="mostrar" onchange="togglePasswordVisibility();">
-        <br>
-        
+     
+      
         <button type="button" onclick="savedusers();">Desar</button>
         <button type="button" onclick="viewSaved();">View Saved Users</button>
         <button type="button" onclick="window.location.href='index.html';">No Desar</button>
         <br><br>
         
           <button type="button" onclick="Keyboard();"><img src="img/keyboard.png" alt=""/></button>
+        
     </form>
     <div id="Teclat" translate="no"  hidden>
             <table id="Minus" ><strong>
