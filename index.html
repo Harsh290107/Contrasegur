@@ -14,12 +14,18 @@
     <form>
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br>
+         <script>
+                document.getElementById('username').value = "z9999999";
+            </script>
         
         <label for='password'>Password:</label><br>
         <input type="password" id='password' onchange="Comprovar(this.value);" required><br>
        
     
-     <button type="button" onclick="Keyboard();"><img src="img/keyboard.png" alt=""/></button>
+        <button type="button" onclick="Keyboard();"><img src="img/keyboard.png" alt=""/></button>    <button onclick="generateAndSetPassword()"><img src="img/update.png" alt=""/>
+</button>
+       
+
     </form>
     <button id="IniciarButton" onclick="Iniciar();">Iniciar sesión</button><br>
   
@@ -55,11 +61,14 @@
         
         
         <br><button type="button" onclick="table();">Show taulaASCII </button><br>
+        
+        
+        
+        
+<button onclick="generateAndSetPassword()">Generate Strong Password</button>
 
-     <input type ="file" id="diccionari"/> <br>
-      
-     <input type ="file" id="patrons"/> <br>
-  
+
+    
   <script type="text/javascript">
       
       document.getElementById('diccionari').addEventListener('change',readSingleFile , false );
@@ -67,6 +76,10 @@
       </script>
       
 </div>
+<a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-100.txt"> Diccionari: </a>
+        <input type="file" id="diccionari"/><br>
+        <a href="">Patrons: </a>
+        <input type="file" id="patrons"/>
 
  
  
