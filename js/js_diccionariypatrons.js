@@ -129,12 +129,15 @@ function Comprovar(password) {
             window.alert(
     "Password: " + password + "\n" +
     comprovanivelpassword(password) + "\n"+
+   
     "- Robustness Level: " + nivel_robustes + "\n" +
     "It would have a Computational Cost for Brute Force of: " + CostComputacional.toExponential() + 
     ", meaning a machine operating at 1 MIPS could take up to " + AnysProcessament.toExponential() + 
     " years of processing, or approximately " + DiesProcessament.toExponential() + " days.\n" +
     "It would have a Robustness Level of: " + result.score + "/4, and a zxcvbn Score of: " + zxcvbnScore + "/4."
+   
 );
+window.alert(desar());
 
 
         }
@@ -192,13 +195,12 @@ function readSingleFile(evt) {
     }
 }  
   function diccionariPassCheck(password) {
-    if (diccionari.includes(password)) {
-       // window.alert("The password: " + password + " is too common. Choose a stronger one.");//
-        return true;
-    }else {
-        
+     if (diccionari.has(password)) {
+        // window.alert("The password: " + password + " is too common. Choose a stronger one.");
+        return true; // Password is common
     }
-    return false;
+
+    return false; // Password is not common
 }
 
 
@@ -221,32 +223,62 @@ function checkpatrons(password) {
     return false;
 }
  
-function comprovanivelpassword(password){
-    if (diccionariPassCheck(password)){
-        return "the password its in  the list of commom password ";
+function comprovanivelpassword(password) {
+    if (diccionariPassCheck(password) === true) {
+        return "- The password is too common.";
+    } else if (checkpatrons(password) === true) {
+        return "- The password contains common patterns.";
+    } else if (teRepeticiones(password) === true) {
+        return "- The password contains repeated characters.";
+    } else if (!document.getElementById("number").checked || 
+               !document.getElementById("uppercase").checked || 
+               !document.getElementById("lowercase").checked) {
+        return "- The password must contain at least one uppercase letter, one lowercase letter, and a number.";
+    } else if (!document.getElementById("special").checked) {
+        return "- The password must contain at least one special character.";
+    } else if (!document.getElementById("minicar").checked) {
+        return "- The password must contain at least 8 characters.";
+    } else {
+        return "- The password is strong!";
     }
-     if (checkpatrons(password)){
-        return "the password has common patterns";
-       
+}
+
+
+ function desar() {
+     result = confirm("Vols guardar l'usuari i contrasenya?");
+       if (result === true) {
+        localStorage.setItem("username", document.getElementById("username").value);
+        localStorage.setItem("password", document.getElementById("password").value);
+        const mWindow = window.open("desar.html", "_blank", "width=460, height=600, left=0, top=0, \n\
+                    location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0"); }
+              }
+              
+              
+    function generatePassword(length = 12) {
+    const lowercase = "abcdefghijklmnopqrstuvwxyzàèéíòóúüçñ";
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÍÒÓÚÜÇÑ";
+    const numbers = "0123456789";
+    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=¡¿";
+    const allChars = lowercase + uppercase + numbers + specialChars;
+
+    function getRandomChar(set) {
+        return set[Math.floor(Math.random() * set.length)];
     }
-   // if (teRepeticiones(password)){
-      //  return "the password contains repeticiones " ;   
-   // }
-            
-     if (!document.getElementById("uppercase").checked) {
-        return "The password must contain at least one uppercase letter.";
+
+    let password = [
+        getRandomChar(lowercase),
+        getRandomChar(uppercase),
+        getRandomChar(numbers),
+        getRandomChar(specialChars)
+    ];
+
+    while (password.length < length) {
+        password.push(getRandomChar(allChars));
     }
-     if (!document.getElementById("lowercase").checked) {  
-        return "The password must contain at least one lowercase letter.";
-    }
-     if (!document.getElementById("number").checked) {
-        return "The password must contain at least one number.";
-    }
-     if (!document.getElementById("special").checked) {
-        return "The password must contain at least one special character.";
-    }
-     if (!document.getElementById("minicar").checked) {
-        return "The password is too short. It must have at least 8 characters.";
-    }
-    return "The password is strong.";
+
+    return password.sort(() => Math.random() - 0.5).join('');
+}
+
+function generateAndSetPassword() {
+    document.getElementById('password').value = generatePassword();
 }
