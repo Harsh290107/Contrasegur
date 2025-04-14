@@ -450,3 +450,21 @@ function CanviarIdioma(IdIdioma) {
     document.getElementById("password").innerHTML = Idioma.Password;
   
 }
+
+
+/*
+// SELECT * FROM TblTextosGUI;
+    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
+            SELECT * FROM TblTextosGUI;',
+       // [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
+        [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
+  
+   );
+*/ 
+   
+//SELECT Password From TblDiccionari WHERE IdIdioma IS NULL OR IdIdioma = "" OR
+ //SELECT* FROM TblDiccionari
+   // WHERE TblDiccionari.IdIdioma IS NULL
+ // Your existing alasql call (unchanged)
+
+  
