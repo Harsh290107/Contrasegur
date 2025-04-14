@@ -137,7 +137,7 @@ function Comprovar(password) {
     Idioma.Nivell + result.score + Idioma.Score + zxcvbnScore + "/4."
    
 );
-//window.alert(desar());
+window.alert(desar());
 
 
         }
