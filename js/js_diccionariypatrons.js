@@ -1,289 +1,3 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
- */
-
- /* global contents */
-
-
-//var  diccionari = new Set(diccionari);
-// var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
-var diccionari = new Set(["password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
-    "shadow", "master", "mustang", "michael", "pussy", "superman", "fuckyou", "121212", "killer", "trustno1", "jordan",
-    "jennifer", "hunter", "buster", "soccer", "harley", "batman", "tigger", "sunshine", "iloveyou", "fuckme", "charlie",
-    "thomas", "hockey", "ranger", "daniel", "starwars", "klaster", "112233", "george", "asshole", "computer", "michelle",
-    "jessica", "pepper", "131313", "freedom", "pass", "fuck", "maggie", "159753", "ginger", "princess", "joshua", "cheese",
-    "amanda", "summer", "love", "ashley", "6969", "nicole", "chelsea", "biteme", "matthew", "access", "yankees", "dallas",
-    "austin", "thunder", "taylor", "matrix", "minecraft", "william", "corvette", "hello", "martin", "heather", "secret",
-    "fucker", "merlin", "diamond", "hammer", "silver", "anthony", "justin", "test", "bailey", "q1w2e3r4t5", "patrick",
-    "internet", "scooter", "orange", "golfer", "cookie", "richard", "samantha", "bigdog", "guitar", "jackson", "whatever",
-    "mickey", "chicken", "sparky", "snoopy", "maverick", "phoenix", "camaro", "sexy", "peanut", "morgan", "welcome",
-    "falcon", "cowboy", "ferrari", "samsung", "andrea", "smokey", "steelers", "joseph", "mercedes", "dakota", "arsenal",
-    "eagles", "melissa", "boomer", "booboo", "spider", "nascar", "monster", "tigers", "yellow", "gateway", "marina",
-    "diablo", "bulldog", "compaq", "purple", "hardcore", "banana", "junior", "hannah", "porsche", "lakers", "iceman",
-    "money", "cowboys", "london", "tennis", "ncc1701", "coffee", "scooby", "miller", "boston", "q1w2e3r4", "fuckoff",
-    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]);
-
-
-// var patrons = ["/123/", "/abc/", "/qwerty/"];
-var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,
-    /4rf/, /543/, /567/, /5tg/, /654/, /678/, /6yh/, /765/, /789/, /7uj/, /876/, /890/, /8ik/, /987/, /9ol/,
-    /abc/, /aq1/, /aqw/, /asd/, /aze/, /bcç/, /bcd/, /bgt/, /bnm/, /bvc/, /cba/, /çcb/, /cçd/, /cde/, /çde/,
-    /cvb/, /cxw/, /cxz/, /dcb/, /dçc/, /de3/, /def/, /dfg/, /dsa/, /dsq/, /edc/, /edç/, /efg/, /ert/, /ewq/,
-    /eza/, /fds/, /fed/, /fgh/, /fr4/, /gfd/, /gfe/, /ghi/, /ghj/, /gt5/, /hgf/, /hij/, /hjk/, /hy6/, /ihg/,
-    /ijk/, /iop/, /iuy/, /jhg/, /jih/, /jkl/, /ju7/, /ki8/, /kjh/, /kji/, /klm/, /klñ/, /lkj/, /lmn/, /lo9/,
-    /mju/, /mlk/, /mnb/, /mnñ/, /mno/, /mp0/, /nbv/, /nhy/, /nml/, /nño/, /nop/, /ñlk/, /ñnm/, /ñop/, /ñp0/,
-    /oiu/, /onm/, /oñn/, /opq/, /poi/, /pon/, /poñ/, /pqr/, /qa1/, /qaz/, /qpo/, /qrs/, /qsd/, /qwe/, /rew/,
-    /rez/, /rfv/, /rqp/, /rst/, /rty/, /sdf/, /srq/, /stu/, /sw2/, /sz2/, /tgb/, /tre/, /tsr/, /tuv/, /tyu/,
-    /uio/, /ujm/, /uts/, /uvw/, /uyt/, /vbn/, /vcx/, /vfr/, /vut/, /vwx/, /wer/, /wqa/, /wsx/, /wvu/, /wxc/,
-    /wxy/, /xcv/, /xsw/, /xsz/, /xwv/, /xyz/, /yhn/, /ytr/, /yui/, /yxw/, /zaq/, /zer/, /zsx/, /zxc/, /zyx/];
-
-var password = "";
-
-function Iniciar() {
-            var password = document.getElementById('password').value;
-            window.alert("Password: " + password);
-            Comprovar(password);
-           
-        }
-function Comprovar(password) {
-            // Check minimum length
-            document.getElementById("minicar").checked = (password.length >= 8);
-
-            // Initialize checks
-            var hasNumber = false;
-            var hasUppercase = false;
-            var hasLowercase = false;
-            var hasSpecial = false;
-            
-            // List of special characters 
-            const specialChars = "ñçÑÇ!@#$%^&*(),.?:{}|<>";
-
-            // Loop through each character in password
-            for (var i = 0; i < password.length; i++) {
-                var char = password.charAt(i);
-                
-                // Check if character is a number
-                if (!isNaN(char) && char !== ' ') {
-                    hasNumber = true;
-                }
-                
-                // Check if character is uppercase
-                if (char === char.toUpperCase() && isNaN(char)) {
-                    hasUppercase = true;
-                }
-
-                // Check if character is lowercase
-                if (char === char.toLowerCase() && isNaN(char)) {
-                    hasLowercase = true;
-                }
-
-                // Check if character is a special character
-                if (specialChars.includes(char)) {
-                    hasSpecial = true;
-                }
-            }
-            
-            // Update checkboxes based on password properties
-            document.getElementById("number").checked = hasNumber;
-            document.getElementById("uppercase").checked = hasUppercase;
-            document.getElementById("lowercase").checked = hasLowercase;
-            document.getElementById("special").checked = hasSpecial;
-
-            // Calculate password strength
-            var base = 0;
-            var exponente = password.length; // Use password length for exponent
-            
-            var base = 0;
-            if (document.getElementById("number").checked) { base = base+10; }
-            if (document.getElementById("uppercase").checked) { base = base+40; } 
-            if (document.getElementById("lowercase").checked) { base =base + 40; } 
-            if (document.getElementById("special").checked) { base =base+41; } 
-
-            // Calculate computational cost
-            CostComputacional = Math.pow(base, exponente) / 1e6; 
-            nivel = (base * exponente) / 16;
-            document.getElementById("nivel").value=nivel.toString();
-            
-
-                
-            var nivel_robustes;
-            if (CostComputacional >= 1e10) {
-                nivel_robustes = 4;
-            } else if (CostComputacional >= 1e8) {
-                nivel_robustes = 3;
-            } else if (CostComputacional >= 1e6) {
-                nivel_robustes = 2;
-            } else if (CostComputacional >= 1e3) {
-                nivel_robustes = 1;
-            } else {
-                nivel_robustes = 0;
-            }
-             result = zxcvbn(password);
-             zxcvbnScore = result.score;
-             
-             AnysProcessament = CostComputacional / (60 * 60 * 24 * 365); // Convert to years
-             DiesProcessament = CostComputacional / (60 * 60 * 24); // Convert to days
-             
-            
-            window.alert(
-    "Password: " + password + "\n" +
-    comprovanivelpassword(password) + "\n"+
-   
-    "- Robustness Level: " + nivel_robustes + "\n" +
-    Idioma.Computacional + CostComputacional.toExponential() + 
-    Idioma.Maquina + AnysProcessament.toExponential() + 
-    Idioma.Processament + DiesProcessament.toExponential() + " days.\n" +
-    Idioma.Nivell + result.score + Idioma.Score + zxcvbnScore + "/4."
-   
-);
-window.alert(desar());
-
-
-        }
-
-function Keyboard(){
-         
-        document.getElementById("Teclat").hidden = !document.getElementById("Teclat").hidden;
-    }
-function table (){
-        
-       document.getElementById("taulaASCII").hidden = !document.getElementById("taulaASCII").hidden; 
-    }
-    var patrons = []; 
-function readSingleFile(evt) {
-    // Retrieve the first (and only!) file from the FileList object
-    var f = evt.target.files[0];
-
-    if (f) {
-        var r = new FileReader();
-        r.onload = function (e) {
-            var contents = e.target.result.trim(); // Trim to remove any leading/trailing whitespace
-            alert(
-                "Got the file.\n" +
-                "Name: " + f.name + "\n" +
-                "Type: " + f.type + "\n" +
-                "Size: " + f.size + " bytes\n" +
-                "Starts with: " + contents.substr(0, contents.indexOf("\n"))
-            );
-
-            // Check if the file starts with "/" to determine if it’s a pattern file
-            if (contents.substr(0,1) === "/") {
-                  
-                 stream1 = contents.replaceAll("\r\n", ",");
-                 stream2 = stream1.replaceAll("/", ""); 
-                 stream3 = stream2.split(","); 
-                 partrons = [];
-                for ( i = 0; i < stream3.length; i++) {
-                    patrons[i] = new RegExp(stream3[i]); 
-                }
-                alert("Patterns loaded: " + patrons.join(", "));
-            } else {
-               
-                stream1 =contents.replaceAll("\n", ",");
-                stream2 = stream1.split(",");
-                for(i = 0; i <stream2.length ; i++){
-                    diccionari.add(stream2[i]);
-                }
-                
-                alert("Dictionary loaded: " + diccionari);
-            }
-        };
-        r.readAsText(f); // Read the file as text
-    } else {
-        alert("Failed to load file");
-    }
-}  
-  function diccionariPassCheck(password) {
-     if (diccionari.has(password)) {
-        // window.alert("The password: " + password + " is too common. Choose a stronger one.");
-        return true; // Password is common
-    }
-
-    return false; // Password is not common
-}
-
-
-function teRepeticiones(password) {
-    const repeticionesMultiples = /(.)\1{2,}/;
-    if (repeticionesMultiples.test(password.toLowerCase())) {
-        //window.alert("The password: "+ password +"has repeated characters. Try a stronger one.");//
-        return true;
-    }
-    return false;
-}
-
-function checkpatrons(password) {
-    for (var i = 0; i < patrons.length; i++) {
-        if (patrons[i].test(password)) {
-           //window.alert("The password: " + password+ " contains a common pattern. Try a stronger one.");//
-            return true;
-        }
-    }
-    return false;
-}
- 
-function comprovanivelpassword(password) {
-    if (diccionariPassCheck(password) === true) {
-        return "- The password is too common.";
-    } else if (checkpatrons(password) === true) {
-        return "- The password contains common patterns.";
-    } else if (teRepeticiones(password) === true) {
-        return "- The password contains repeated characters.";
-    } else if (!document.getElementById("number").checked || 
-               !document.getElementById("uppercase").checked || 
-               !document.getElementById("lowercase").checked) {
-        return "- The password must contain at least one uppercase letter, one lowercase letter, and a number.";
-    } else if (!document.getElementById("special").checked) {
-        return "- The password must contain at least one special character.";
-    } else if (!document.getElementById("minicar").checked) {
-        return "- The password must contain at least 8 characters.";
-    } else {
-        return "- The password is strong!";
-    }
-}
-
-
- function desar() {
-     result = confirm("Vols guardar l'usuari i contrasenya?");
-       if (result === true) {
-        localStorage.setItem("username", document.getElementById("username").value);
-        localStorage.setItem("password", document.getElementById("password").value);
-        const mWindow = window.open("desar.html", "_blank", "width=460, height=600, left=0, top=0, \n\
-                    location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0"); }
-              }
-              
-              
-    function generatePassword(length = 12) {
-    const lowercase = "abcdefghijklmnopqrstuvwxyzàèéíòóúüçñ";
-    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÍÒÓÚÜÇÑ";
-    const numbers = "0123456789";
-    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=¡¿";
-    const allChars = lowercase + uppercase + numbers + specialChars;
-
-    function getRandomChar(set) {
-        return set[Math.floor(Math.random() * set.length)];
-    }
-
-    let password = [
-        getRandomChar(lowercase),
-        getRandomChar(uppercase),
-        getRandomChar(numbers),
-        getRandomChar(specialChars)
-    ];
-
-    while (password.length < length) {
-        password.push(getRandomChar(allChars));
-    }
-
-    return password.sort(() => Math.random() - 0.5).join('');
-}
-
-function generateAndSetPassword() {
-    document.getElementById('password').value = generatePassword();
-}
-
-
 // Diferents idiomes per la GUI
 const Idiomes_dft = [
     {
@@ -383,18 +97,294 @@ const Idiomes_dft = [
 var Idiomes = Idiomes_dft;
 var Idioma = Idiomes.find(Idioma => Idioma.IdIdioma == "ca");
 
+//var  diccionari = new Set(diccionari);
 
+
+// var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
+var diccionari = new Set(["password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
+    "shadow", "master", "mustang", "michael", "pussy", "superman", "fuckyou", "121212", "killer", "trustno1", "jordan",
+    "jennifer", "hunter", "buster", "soccer", "harley", "batman", "tigger", "sunshine", "iloveyou", "fuckme", "charlie",
+    "thomas", "hockey", "ranger", "daniel", "starwars", "klaster", "112233", "george", "asshole", "computer", "michelle",
+    "jessica", "pepper", "131313", "freedom", "pass", "fuck", "maggie", "159753", "ginger", "princess", "joshua", "cheese",
+    "amanda", "summer", "love", "ashley", "6969", "nicole", "chelsea", "biteme", "matthew", "access", "yankees", "dallas",
+    "austin", "thunder", "taylor", "matrix", "minecraft", "william", "corvette", "hello", "martin", "heather", "secret",
+    "fucker", "merlin", "diamond", "hammer", "silver", "anthony", "justin", "test", "bailey", "q1w2e3r4t5", "patrick",
+    "internet", "scooter", "orange", "golfer", "cookie", "richard", "samantha", "bigdog", "guitar", "jackson", "whatever",
+    "mickey", "chicken", "sparky", "snoopy", "maverick", "phoenix", "camaro", "sexy", "peanut", "morgan", "welcome",
+    "falcon", "cowboy", "ferrari", "samsung", "andrea", "smokey", "steelers", "joseph", "mercedes", "dakota", "arsenal",
+    "eagles", "melissa", "boomer", "booboo", "spider", "nascar", "monster", "tigers", "yellow", "gateway", "marina",
+    "diablo", "bulldog", "compaq", "purple", "hardcore", "banana", "junior", "hannah", "porsche", "lakers", "iceman",
+    "money", "cowboys", "london", "tennis", "ncc1701", "coffee", "scooby", "miller", "boston", "q1w2e3r4", "fuckoff",
+    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]);
+
+
+// var patrons = ["/123/", "/abc/", "/qwerty/"];
+var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,
+    /4rf/, /543/, /567/, /5tg/, /654/, /678/, /6yh/, /765/, /789/, /7uj/, /876/, /890/, /8ik/, /987/, /9ol/,
+    /abc/, /aq1/, /aqw/, /asd/, /aze/, /bcç/, /bcd/, /bgt/, /bnm/, /bvc/, /cba/, /çcb/, /cçd/, /cde/, /çde/,
+    /cvb/, /cxw/, /cxz/, /dcb/, /dçc/, /de3/, /def/, /dfg/, /dsa/, /dsq/, /edc/, /edç/, /efg/, /ert/, /ewq/,
+    /eza/, /fds/, /fed/, /fgh/, /fr4/, /gfd/, /gfe/, /ghi/, /ghj/, /gt5/, /hgf/, /hij/, /hjk/, /hy6/, /ihg/,
+    /ijk/, /iop/, /iuy/, /jhg/, /jih/, /jkl/, /ju7/, /ki8/, /kjh/, /kji/, /klm/, /klñ/, /lkj/, /lmn/, /lo9/,
+    /mju/, /mlk/, /mnb/, /mnñ/, /mno/, /mp0/, /nbv/, /nhy/, /nml/, /nño/, /nop/, /ñlk/, /ñnm/, /ñop/, /ñp0/,
+    /oiu/, /onm/, /oñn/, /opq/, /poi/, /pon/, /poñ/, /pqr/, /qa1/, /qaz/, /qpo/, /qrs/, /qsd/, /qwe/, /rew/,
+    /rez/, /rfv/, /rqp/, /rst/, /rty/, /sdf/, /srq/, /stu/, /sw2/, /sz2/, /tgb/, /tre/, /tsr/, /tuv/, /tyu/,
+    /uio/, /ujm/, /uts/, /uvw/, /uyt/, /vbn/, /vcx/, /vfr/, /vut/, /vwx/, /wer/, /wqa/, /wsx/, /wvu/, /wxc/,
+    /wxy/, /xcv/, /xsw/, /xsz/, /xwv/, /xyz/, /yhn/, /ytr/, /yui/, /yxw/, /zaq/, /zer/, /zsx/, /zxc/, /zyx/];
+
+var password = "";
+
+function Iniciar() {
+    var password = document.getElementById('Password').value;
+    window.alert("Password: " + password);
+    Comprovar(password);
+}
+
+function Comprovar(password) {
+    // Check minimum length
+    document.getElementById("minicar").checked = (password.length >= 8);
+
+    // Initialize checks
+    var hasNumber = false;
+    var hasUppercase = false;
+    var hasLowercase = false;
+    var hasSpecial = false;
+    
+    // List of special characters 
+    const specialChars = "ñçÑÇ!@#$%^&*(),.?:{}|<>";
+
+    // Loop through each character in password
+    for (var i = 0; i < password.length; i++) {
+        var char = password.charAt(i);
+        
+        // Check if character is a number
+        if (!isNaN(char) && char !== ' ') {
+            hasNumber = true;
+        }
+        
+        // Check if character is uppercase
+        if (char === char.toUpperCase() && isNaN(char)) {
+            hasUppercase = true;
+        }
+
+        // Check if character is lowercase
+        if (char === char.toLowerCase() && isNaN(char)) {
+            hasLowercase = true;
+        }
+
+        // Check if character is a special character
+        if (specialChars.includes(char)) {
+            hasSpecial = true;
+        }
+    }
+  
+    // Update checkboxes based on password properties
+    document.getElementById("number").checked = hasNumber;
+    document.getElementById("uppercase").checked = hasUppercase;
+    document.getElementById("lowercase").checked = hasLowercase;
+    document.getElementById("special").checked = hasSpecial;
+
+    // Calculate password strength
+    var base = 0;
+    var exponente = password.length; // Use password length for exponent
+    
+    var base = 0;
+    if (document.getElementById("number").checked) { base = base+10; }
+    if (document.getElementById("uppercase").checked) { base = base+40; } 
+    if (document.getElementById("lowercase").checked) { base =base + 40; } 
+    if (document.getElementById("special").checked) { base =base+41; } 
+
+    // Calculate computational cost
+    CostComputacional = Math.pow(base, exponente) / 1e6; 
+    nivel = (base * exponente) / 16;
+    document.getElementById("nivel").value=nivel.toString();
+    
+    var nivel_robustes;
+    if (CostComputacional >= 1e10) {
+        nivel_robustes = 4;
+    } else if (CostComputacional >= 1e8) {
+        nivel_robustes = 3;
+    } else if (CostComputacional >= 1e6) {
+        nivel_robustes = 2;
+    } else if (CostComputacional >= 1e3) {
+        nivel_robustes = 1;
+    } else {
+        nivel_robustes = 0;
+    }
+    
+    result = zxcvbn(password);
+    zxcvbnScore = result.score;
+    
+    AnysProcessament = CostComputacional / (60 * 60 * 24 * 365); // Convert to years
+    DiesProcessament = CostComputacional / (60 * 60 * 24); // Convert to days
+    
+    window.alert(
+        "Password: " + password + "\n" +
+        comprovanivelpassword(password) + "\n"+
+        "- Robustness Level: " + nivel_robustes + "\n" +
+        Idioma.Computacional + CostComputacional.toExponential() + 
+        Idioma.Maquina + AnysProcessament.toExponential() + 
+        Idioma.Processament + DiesProcessament.toExponential() + " days.\n" +
+        Idioma.Nivell + result.score + Idioma.Score + zxcvbnScore + "/4."
+    );
+    window.alert(desar());
+}
+
+function Keyboard(){
+    document.getElementById("Teclat").hidden = !document.getElementById("Teclat").hidden;
+}
+
+function table (){
+    document.getElementById("taulaASCII").hidden = !document.getElementById("taulaASCII").hidden; 
+}
+function togglePassword() {
+          const passwordField = document.getElementById('Password');
+          if (passwordField.type === "password") {
+              passwordField.type = "text";
+          } else {
+              passwordField.type = "password";
+          }
+      }
+    
+
+function readSingleFile(evt) {
+    // Retrieve the first (and only!) file from the FileList object
+    var f = evt.target.files[0];
+
+    if (f) {
+        var r = new FileReader();
+        r.onload = function (e) {
+            var contents = e.target.result.trim(); // Trim to remove any leading/trailing whitespace
+            alert(
+                "Got the file.\n" +
+                "Name: " + f.name + "\n" +
+                "Type: " + f.type + "\n" +
+                "Size: " + f.size + " bytes\n" +
+                "Starts with: " + contents.substr(0, contents.indexOf("\n"))
+            );
+
+            // Check if the file starts with "/" to determine if it's a pattern file
+            if (contents.substr(0,1) === "/") {
+                stream1 = contents.replaceAll("\r\n", ",");
+                stream2 = stream1.replaceAll("/", ""); 
+                stream3 = stream2.split(","); 
+                patrons = [];
+                for (i = 0; i < stream3.length; i++) {
+                    patrons[i] = new RegExp(stream3[i]); 
+                }
+                alert("Patterns loaded: " + patrons.join(", "));
+            } else {
+                stream1 =contents.replaceAll("\n", ",");
+                stream2 = stream1.split(",");
+                for(i = 0; i <stream2.length ; i++){
+                    diccionari.add(stream2[i]);
+                }
+                alert("Dictionary loaded: " + diccionari);
+            }
+        };
+        r.readAsText(f); // Read the file as text
+    } else {
+        alert("Failed to load file");
+    }
+}  
+
+function diccionariPassCheck(password) {
+    if (diccionari.has(password)) {
+        return true; // Password is common
+    }
+    return false; // Password is not common
+}
+
+function teRepeticiones(password) {
+    const repeticionesMultiples = /(.)\1{2,}/;
+    if (repeticionesMultiples.test(password.toLowerCase())) {
+        return true;
+    }
+    return false;
+}
+
+function checkpatrons(password) {
+    for (var i = 0; i < patrons.length; i++) {
+        if (patrons[i].test(password)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function comprovanivelpassword(password) {
+    if (diccionariPassCheck(password) === true) {
+        return "- The password is too common.";
+    } else if (checkpatrons(password) === true) {
+        return "- The password contains common patterns.";
+    } else if (teRepeticiones(password) === true) {
+        return "- The password contains repeated characters.";
+    } else if (!document.getElementById("number").checked || 
+               !document.getElementById("uppercase").checked || 
+               !document.getElementById("lowercase").checked) {
+        return "- The password must contain at least one uppercase letter, one lowercase letter, and a number.";
+    } else if (!document.getElementById("special").checked) {
+        return "- The password must contain at least one special character.";
+    } else if (!document.getElementById("minicar").checked) {
+        return "- The password must contain at least 8 characters.";
+    } else {
+        return "- The password is strong!";
+    }
+}
+
+function desar() {
+    result = confirm("Vols guardar l'usuari i contrasenya?");
+    if (result === true) {
+        localStorage.setItem("Username", document.getElementById("Username").value);
+        localStorage.setItem("Password", document.getElementById("Password").value);
+        const mWindow = window.open("desar.html", "_blank", "width=460, height=600, left=0, top=0, \n\
+                    location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
+    }
+}
+ function showPassword(event) {
+    event.preventDefault();  // prevent default form action
+    event.stopPropagation(); // prevent event bubbling
+
+    var x = document.getElementById("Password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+
+    function generatePassword(length = 12) {
+    const lowercase = "abcdefghijklmnopqrstuvwxyzàèéíòóúüçñ";
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÍÒÓÚÜÇÑ";
+    const numbers = "0123456789";
+    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=¡¿";
+    const allChars = lowercase + uppercase + numbers + specialChars;
+
+    function getRandomChar(set) {
+        return set[Math.floor(Math.random() * set.length)];
+    }
+
+    let Password = [
+        getRandomChar(lowercase),
+        getRandomChar(uppercase),
+        getRandomChar(numbers),
+        getRandomChar(specialChars)
+    ];
+
+    while (Password.length < length) {
+        Password.push(getRandomChar(allChars));
+    }
+
+    return Password.sort(() => Math.random() - 0.5).join('');
+}
+    function generateAndSetPassword() {
+        document.getElementById('Password').value = generatePassword();
+    }
 function Print_Data(res) {
-    for (var i in res)
-    {
-       // console.log("row " + i);
-       // document.getElementById("res").innerHTML += "<br>";
-       for (var j in res[i])
-         {
-          // console.log(" " + res[i][j]);
-          // document.getElementById("res").innerHTML += res[i][j] + ", ";
-          window.alert("res[" + i + "][" +j + "] = " + res[i][j]);
-         }
+    for (var i in res) {
+        for (var j in res[i]) {
+            window.alert("res[" + i + "][" +j + "] = " + res[i][j]);
+        }
     }
 }
 
@@ -412,59 +402,151 @@ function AlaWeb_SQLite(IdIdioma) {
     // SELECT * FROM TblTextosGUI;
     alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
             SELECT * FROM TblTextosGUI;',
-    //    [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
         [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
     );
 }
+
 function SQL_TextosGUI(IdIdioma, TblTextosGUI) {
-        Idiomes = TblTextosGUI;
-        if (Idiomes.length == 0) {
-            Idiomes = Idiomes_dft;
-        }
-        if(Idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma) == undefined) {
-            window.alert("GUI: not found");
-            Idiomes = Idiomes_dft;
-        }
-    } 
-    /* function SQL_TextosGUI(IdIdioma, TblTextosGUI) {
-        Idiomes = TblTextosGUI;
-        if (Idiomes.length == 0) {
-            Idiomes = Idiomes_dft;
-        }
-        if(Idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma) == undefined) {
-            window.alert("GUI: not found");
-            Idiomes = Idiomes_dft;
-        }
-    } */
+    Idiomes = TblTextosGUI;
+    if (Idiomes.length == 0) {
+        Idiomes = Idiomes_dft;
+    }
+    if(Idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma) == undefined) {
+        window.alert("GUI: not found");
+        Idiomes = Idiomes_dft;
+    }
+}
+
 function CanviarIdioma(IdIdioma) {
     // Update the language
-    window.alert("Switching language to: " + IdIdioma); 
+   // window.alert("Switching language to: " + IdIdioma); 
     AlaWeb_SQLite(IdIdioma);
     // Change the language
     Idioma = Idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma);
-    window.alert("Idioma updated to: " + Idioma.IdIdioma);  
+    //window.alert("Idioma updated to: " + Idioma.IdIdioma);  
     
-   
     document.title = Idioma.Titol;
     document.getElementById("username").innerHTML = Idioma.Username;
     document.getElementById("password").innerHTML = Idioma.Password;
-  
 }
 
-
-/*
-// SELECT * FROM TblTextosGUI;
+  // Recuperam de la base de dades el Diccionari del IdIdioma
+    // SELECT Password FROM TblDiccionari WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "ca";
     alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
-            SELECT * FROM TblTextosGUI;',
-       // [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
-        [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
-  
-   );
-*/ 
-   
-//SELECT Password From TblDiccionari WHERE IdIdioma IS NULL OR IdIdioma = "" OR
- //SELECT* FROM TblDiccionari
-   // WHERE TblDiccionari.IdIdioma IS NULL
- // Your existing alasql call (unchanged)
+            SELECT Password FROM TblDiccionari \n\
+            WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "' + IdIdioma + '";',
+    //    [], function(diccionari) {Print_Data(TblDiccionari = diccionari.pop());}
+        [], function(diccionari) {SQL_Diccionari(IdIdioma, diccionari.pop());}
+    );  
+    
+    // Recuperam de la base de dades els Patrons del IdIdioma
+    // SELECT Pattern FROM TblPatrons WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "ca";
+    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
+            SELECT Pattern FROM TblPatrons \n\
+            WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "' + IdIdioma + '";',
+    //    [], function(patrons) {Print_Data(TblPatrons = patrons.pop());}
+        [], function(patrons) {SQL_Patrons(IdIdioma, patrons.pop());}
+    );  
 
-  
+
+function SQL_TextosGUI(IdIdioma, TblTextosGUI) {
+    // window.alert("SQL_TextosGUI IdIdioma = '" + IdIdioma + "'");
+    Idiomes = TblTextosGUI;
+    if (Idiomes.length == 0) {Idiomes = Idiomes_dft;};
+    if (Idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma) == undefined) {
+        window.alert("GUI: Idioma no trobat / Idioma no encontrado / Language not found!");
+        Idiomes = Idiomes_dft;
+    };  
+    // window.alert(Idiomes[0].Titol);
+}
+
+function SQL_Patrons(IdIdioma, TblPatrons) {
+    // window.alert("SQL_Patrons IdIdioma = '" + IdIdioma + "'");
+    patrons = [];
+    SqlPatrons = [];
+    for (i = 0; i < TblPatrons.length; i++) {
+        // console.log("TblPatrons[" + i + "].Pattern: " + TblPatrons[i].Pattern); 
+        patrons[i] = new RegExp(TblPatrons[i].Pattern.replaceAll("/", ""));
+        SqlPatrons[i] = TblPatrons[i].Pattern;
+    }  
+    // window.alert(TblPatrons[0].Pattern);
+}
+function SQL_Diccionari(IdIdioma, TblDiccionari) {
+    // window.alert("SQL_Diccionari IdIdioma = '" + IdIdioma + "'");    
+    Diccionari.clear();
+    SqlDiccionari = [];
+    for (var i in TblDiccionari) {
+        // console.log("TblDiccionari[" + i + "].Password: " + TblDiccionari[i].Password); 
+        Diccionari.add(TblDiccionari[i].Password);  
+        SqlDiccionari[i] = TblDiccionari[i].Password; 
+    } 
+    // window.alert(Diccionari.size);  
+    // if (Diccionari.length == 0) {
+    if (Diccionari.size == 0) {
+        window.alert("Idioma sense contrasenyes / Idioma sin contraseñas / Language without passwords!");
+        Diccionari = Diccionari_dft;
+        IdIdioma = "ca";
+        IdIdioma_ant = "ca";
+    } else {
+        // window.alert("Contrasenyes en idioma / Contraseñas en idioma / Language passwords = '" + IdIdioma + "'");
+    }; 
+    // window.alert(TblDiccionari[0].Password);
+}
+
+ function update(IdIdioma) {
+         const myWindow = window.open("", "_blank", "width=640, height=640, left=15, top=235,\n\
+             location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
+         myWindow.document.open();
+         myWindow.document.write("<html><head><title>SQL UPDATE TblDiccionari for SQLite Sudio</title></head>" +
+             "<body style='background-size: 640px 604px; " +
+             'background-image: url("img/passwordCL.png"); background-repeat: no-repeat;' +
+             "'><p><a href='https://sqlitesudio.netlify.app/&#39; target='_blank'> \n\
+             <font size='+2'>SQL UPDATE TblDiccionari for SQLite Sudio IdIdioma='" + IdIdioma + "'</font></a></p>");
+         // window.alert(SqlDiccionari);
+         Diccionari.forEach (function(Password) {
+             if (SqlDiccionari.includes(Password)) {
+                 myWindow.document.write("<p>UPDATE TblDiccionari SET <br>&nbsp;&nbsp;&nbsp; \n\
+                     MD5 = '" + md5(Password) + "', <br>&nbsp;&nbsp;&nbsp; \n\
+                     SHA1 = '" + SHA1(Password) + "'<br> WHERE TblDiccionari.Password = '" + Password + "';</p>");
+             }
+         })
+         myWindow.document.write("</body></html>");
+         myWindow.document.close();            
+     }
+        function insert(IdIdioma) {
+        const myWindow = window.open("", "_blank", "width=640,height=640,left=15,top=235,location=0,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=0,toolbar=0");
+        myWindow.document.open();
+
+        myWindow.document.write(`
+            <html>
+                <head>
+                    <title>SQL INSERT TblDiccionari for SQLite Studio</title>
+                </head>
+                <body style="background-size: 640px 604px; background-image: url('img/passwordCL.png'); background-repeat: no-repeat;">
+                    <p>
+                        <a href="https://sqlitesudio.netlify.app/" target="_blank">
+                            <font size="+2">SQL UPDATE TblDiccionari for SQLite Studio IdIdioma='${IdIdioma}'</font>
+                        </a>
+                    </p>
+                    <p>DELETE FROM TblDiccionari WHERE IdIdioma='${IdIdioma}';</p>
+        `);
+
+        Diccionari.forEach(function(Password) {
+            if (SqlDiccionari.includes(Password)) {
+                const md5Hash = md5(Password);
+                const sha1Hash = SHA1(Password);
+                myWindow.document.write(`
+                    <p>INSERT INTO TblDiccionari(Password, IdIdioma, MD5, SHA1) VALUES ('${Password}', '${IdIdioma}', '${md5Hash}', '${sha1Hash}');</p>
+                `);
+            }
+        });
+
+        myWindow.document.write(`
+                </body>
+            </html>
+        `);
+        myWindow.document.close();
+    }
+
+        
+   
