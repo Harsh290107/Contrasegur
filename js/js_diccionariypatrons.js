@@ -2,30 +2,30 @@
 const Idiomes_dft = [
     {
         "IdIdioma": "ca",
-        "Titol": "Versió amb Base de Dades Contrasenyes Segures",
+        "Titol": "VersiÃ³ amb Base de Dades Contrasenyes Segures",
         "Username": "Usuari o correu: ",
         "Password": "Contrasenya: ",
         "Mostrar": "Mostrar: ",
-        "Minimcar": " Mínim 8 caràcters,",        
-        "Majuscula": " almenys una lletra majúscula,",
-        "Minuscula": " almenys una lletra minúscula,",
-        "Numero": " almenys un número,",
-        "Carespecial": " almenys un carácter especial.",
-        "Robustesa": "Dèbil - Regular - Bona - Forta",
-        "Inisessio": "Iniciar sessió",
-        "Massacomu": "La contrasenya és massa comuna. Si us plau, tria una contrasenya més forta.",
+        "Minimcar": " MÃ­nim 8 carÃ cters,",        
+        "Majuscula": " almenys una lletra majÃºscula,",
+        "Minuscula": " almenys una lletra minÃºscula,",
+        "Numero": " almenys un nÃºmero,",
+        "Carespecial": " almenys un carÃ¡cter especial.",
+        "Robustesa": "DÃ¨bil - Regular - Bona - Forta",
+        "Inisessio": "Iniciar sessiÃ³",
+        "Massacomu": "La contrasenya Ã©s massa comuna. Si us plau, tria una contrasenya mÃ©s forta.",
         "Nopatrons": "La contrasenya no pot contenir patrons previsibles.",
-        "Norepmult": "La contrasenya no pot contenir repeticions múltiples de caràcters.",
-        "Majminnum": "La contrasenya ha de contenir almenys una lletra majúscula, una minúscula i un número.",
-        "Almcaresp": "La contrasenya ha de contenir almenys un caràcter especial.",
-        "Almmincar": "La contrasenya és massa curta. Ha de tenir almenys 8 caràcters.",
+        "Norepmult": "La contrasenya no pot contenir repeticions mÃºltiples de carÃ cters.",
+        "Majminnum": "La contrasenya ha de contenir almenys una lletra majÃºscula, una minÃºscula i un nÃºmero.",
+        "Almcaresp": "La contrasenya ha de contenir almenys un carÃ cter especial.",
+        "Almmincar": "La contrasenya Ã©s massa curta. Ha de tenir almenys 8 carÃ cters.",
         "Contrarob": "Contrasenya robusta!",        
-        "Computacional": "\n\     - Tendria un Cost Computacional per Força Bruta de: ",
-        "Maquina": " pel que una màquina a 1 MIPS podria arribar a necessitar ",
+        "Computacional": "\n\     - Tendria un Cost Computacional per ForÃ§a Bruta de: ",
+        "Maquina": " pel que una mÃ quina a 1 MIPS podria arribar a necessitar ",
         "Processament": " anys de processament, es a dir, ",
         "Nivell": " dies.\n\     - Tendria un Nivell de Robustesa de: ",
         "Score": "/4, i un zxcvbn Score de: ",
-        "Voldesar": "Vol desar l'inici de sessió?",
+        "Voldesar": "Vol desar l'inici de sessiÃ³?",
         "Diccionari": "Diccionari: ",
         "Patrons": "Patrons: ",
         "Mostrartaula": "Mostrar taula ASCII-HTML",
@@ -33,30 +33,30 @@ const Idiomes_dft = [
     },
     {
         "IdIdioma": "es",
-        "Titol": "Versión con Base de Datos Contraseñas Seguras",
+        "Titol": "VersiÃ³n con Base de Datos ContraseÃ±as Seguras",
         "Username": "Usuario o correo: ",
-        "Password": "Contraseña: ",
+        "Password": "ContraseÃ±a: ",
         "Mostrar": "Mostrar: ",
-        "Minimcar": " Mínimo 8 carácteres,",        
-        "Majuscula": " almenos una letra mayúscula,",
-        "Minuscula": " almenos una letra minúscula,",
-        "Numero": " almenos un número,",
-        "Carespecial": " almenos un carácter especial.",
-        "Robustesa": "Débil - Regular - Buena - Fuerte",
-        "Inisessio": "Iniciar sesión",
-        "Massacomu": "La contraseña es demasiado común. Por favor, elige una contraseña más fuerte.",
-        "Nopatrons": "La contraseña no puede contener patrones previsibles.",
-        "Norepmult": "La contraseña no puede contener múltiples repeticiones de caracteres.",
-        "Majminnum": "La contraseña debe contener al menos una letra mayúscula, una minúscula y un número.",
-        "Almcaresp": "La contraseña debe contener al menos un carácter especial.",
-        "Almmincar": "La contraseña es demasiado corta. Debe tener al menos 8 caracteres.",
-        "Contrarob": "¡Contraseña robusta!",        
-        "Computacional": "\n\     - Tendría un Coste Computacional por Fuerza Bruta de: ",
-        "Maquina": " por lo que una máquina a 1 MIPS podría llegar a necesitar ",
-        "Processament": " años de procesamiento, es decir, ",
-        "Nivell": " días.\n\     - Tendría un Nivel de Robustez de: ",
+        "Minimcar": " MÃ­nimo 8 carÃ¡cteres,",        
+        "Majuscula": " almenos una letra mayÃºscula,",
+        "Minuscula": " almenos una letra minÃºscula,",
+        "Numero": " almenos un nÃºmero,",
+        "Carespecial": " almenos un carÃ¡cter especial.",
+        "Robustesa": "DÃ©bil - Regular - Buena - Fuerte",
+        "Inisessio": "Iniciar sesiÃ³n",
+        "Massacomu": "La contraseÃ±a es demasiado comÃºn. Por favor, elige una contraseÃ±a mÃ¡s fuerte.",
+        "Nopatrons": "La contraseÃ±a no puede contener patrones previsibles.",
+        "Norepmult": "La contraseÃ±a no puede contener mÃºltiples repeticiones de caracteres.",
+        "Majminnum": "La contraseÃ±a debe contener al menos una letra mayÃºscula, una minÃºscula y un nÃºmero.",
+        "Almcaresp": "La contraseÃ±a debe contener al menos un carÃ¡cter especial.",
+        "Almmincar": "La contraseÃ±a es demasiado corta. Debe tener al menos 8 caracteres.",
+        "Contrarob": "Â¡ContraseÃ±a robusta!",        
+        "Computacional": "\n\     - TendrÃ­a un Coste Computacional por Fuerza Bruta de: ",
+        "Maquina": " por lo que una mÃ¡quina a 1 MIPS podrÃ­a llegar a necesitar ",
+        "Processament": " aÃ±os de procesamiento, es decir, ",
+        "Nivell": " dÃ­as.\n\     - TendrÃ­a un Nivel de Robustez de: ",
         "Score": "/4, y un zxcvbn Score de: ",
-        "Voldesar": "¿Quiere guardar el inicio de sesión?",
+        "Voldesar": "Â¿Quiere guardar el inicio de sesiÃ³n?",
         "Diccionari": "Diccionario: ",
         "Patrons": "Patrones: ",
         "Mostrartaula": "Mostrar tabla ASCII-HTML",
@@ -119,14 +119,14 @@ var diccionari_different = ["Password", "guest", "dragon", "baseball", "football
     "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"];
 var diccionari = new Set(diccionari_different); 
 var Diccionari = new Set(); 
-var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,  
+var patrons = [/098/, /0pm/, /0pÃ±/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,  
     /4rf/, /543/, /567/, /5tg/, /654/, /678/, /6yh/, /765/, /789/, /7uj/, /876/, /890/, /8ik/, /987/, /9ol/, 
-    /abc/, /aq1/, /aqw/, /asd/, /aze/, /bcç/, /bcd/, /bgt/, /bnm/, /bvc/, /cba/, /çcb/, /cçd/, /cde/, /çde/, 
-    /cvb/, /cxw/, /cxz/, /dcb/, /dçc/, /de3/, /def/, /dfg/, /dsa/, /dsq/, /edc/, /edç/, /efg/, /ert/, /ewq/, 
+    /abc/, /aq1/, /aqw/, /asd/, /aze/, /bcÃ§/, /bcd/, /bgt/, /bnm/, /bvc/, /cba/, /Ã§cb/, /cÃ§d/, /cde/, /Ã§de/, 
+    /cvb/, /cxw/, /cxz/, /dcb/, /dÃ§c/, /de3/, /def/, /dfg/, /dsa/, /dsq/, /edc/, /edÃ§/, /efg/, /ert/, /ewq/, 
     /eza/, /fds/, /fed/, /fgh/, /fr4/, /gfd/, /gfe/, /ghi/, /ghj/, /gt5/, /hgf/, /hij/, /hjk/, /hy6/, /ihg/, 
-    /ijk/, /iop/, /iuy/, /jhg/, /jih/, /jkl/, /ju7/, /ki8/, /kjh/, /kji/, /klm/, /klñ/, /lkj/, /lmn/, /lo9/, 
-    /mju/, /mlk/, /mnb/, /mnñ/, /mno/, /mp0/, /nbv/, /nhy/, /nml/, /nño/, /nop/, /ñlk/, /ñnm/, /ñop/, /ñp0/, 
-    /oiu/, /onm/, /oñn/, /opq/, /poi/, /pon/, /poñ/, /pqr/, /qa1/, /qaz/, /qpo/, /qrs/, /qsd/, /qwe/, /rew/, 
+    /ijk/, /iop/, /iuy/, /jhg/, /jih/, /jkl/, /ju7/, /ki8/, /kjh/, /kji/, /klm/, /klÃ±/, /lkj/, /lmn/, /lo9/, 
+    /mju/, /mlk/, /mnb/, /mnÃ±/, /mno/, /mp0/, /nbv/, /nhy/, /nml/, /nÃ±o/, /nop/, /Ã±lk/, /Ã±nm/, /Ã±op/, /Ã±p0/, 
+    /oiu/, /onm/, /oÃ±n/, /opq/, /poi/, /pon/, /poÃ±/, /pqr/, /qa1/, /qaz/, /qpo/, /qrs/, /qsd/, /qwe/, /rew/, 
     /rez/, /rfv/, /rqp/, /rst/, /rty/, /sdf/, /srq/, /stu/, /sw2/, /sz2/, /tgb/, /tre/, /tsr/, /tuv/, /tyu/, 
     /uio/, /ujm/, /uts/, /uvw/, /uyt/, /vbn/, /vcx/, /vfr/, /vut/, /vwx/, /wer/, /wqa/, /wsx/, /wvu/, /wxc/, 
     /wxy/, /xcv/, /xsw/, /xsz/, /xwv/, /xyz/, /yhn/, /ytr/, /yui/, /yxw/, /zaq/, /zer/, /zsx/, /zxc/, /zyx/]; 
@@ -150,7 +150,7 @@ function Comprovar(Password) {
     var hasSpecial = false;
     
     // List of special characters 
-    const specialChars = "ñçÑÇ!@#$%^&*(),.?:{}|<>";
+    const specialChars = "Ã±Ã§Ã‘Ã‡!@#$%^&*(),.?:{}|<>";
 
     // Loop through each character in Password
     for (var i = 0; i < Password.length; i++) {
@@ -354,10 +354,10 @@ function desar() {
 
 
     function generatePassword(length = 12) {
-    const lowercase = "abcdefghijklmnopqrstuvwxyzàèéíòóúüçñ";
-    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÍÒÓÚÜÇÑ";
+    const lowercase = "abcdefghijklmnopqrstuvwxyzÃ Ã¨Ã©Ã­Ã²Ã³ÃºÃ¼Ã§Ã±";
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÃ€ÃˆÃ‰ÃÃ’Ã“ÃšÃœÃ‡Ã‘";
     const numbers = "0123456789";
-    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=¡¿";
+    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=Â¡Â¿";
     const allChars = lowercase + uppercase + numbers + specialChars;
 
     function getRandomChar(set) {
@@ -390,7 +390,7 @@ function Print_Data(res) {
 
 var Diccionari = new Set(); 
 var SqlDiccionari = [];
-// Funció per carregar la base de dades ContraSegur.db
+// FunciÃ³ per carregar la base de dades ContraSegur.db
 function AlaWeb_SQLite(IdIdioma) {
     window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
     config = {
@@ -467,12 +467,12 @@ function CanviarIdioma(IdIdioma) {
         // window.alert(Diccionari.size);  
         // if (Diccionari.length == 0) {
         if (Diccionari.size == 0) {
-            window.alert("Idioma sense contrasenyes / Idioma sin contraseñas / Language without passwords!");
+            window.alert("Idioma sense contrasenyes / Idioma sin contraseÃ±as / Language without passwords!");
             Diccionari = diccionari;
             IdIdioma = "ca";
             IdIdioma_ant = "ca";
         } else {
-            // window.alert("Contrasenyes en idioma / Contraseñas en idioma / Language passwords = '" + IdIdioma + "'");
+            // window.alert("Contrasenyes en idioma / ContraseÃ±as en idioma / Language passwords = '" + IdIdioma + "'");
         };
         // window.alert(TblDiccionari[0].Password);
    }
