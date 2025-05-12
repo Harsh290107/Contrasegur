@@ -1,128 +1,308 @@
-
-
-
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="ca">
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <title>Password Checker</title>
-    <script src="js/zxcvbn.js" type="text/javascript"></script>
-    <script src="js/js_diccionariypatrons.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/styles.css">
+  <script src="js/md5.min.js"></script>
+<script src="js/SHA1_MD5.js"></script>
+<script src="js/alasql.js"></script>
+<script src="js/sql.js"></script>
+<script src="js/zxcvbn.js"></script>
+<script src="js/js_diccionariypatrons.js"></script>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #000;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        /* Green only for Iniciar */
+        #IniciarButton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #IniciarButton:hover {
+            background-color: #45a049;
+        }
+
+        /* Utility Buttons */
+        button:not(#IniciarButton) {
+            background: none;
+            border: 1px solid transparent;
+            color: black;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:not(#IniciarButton):hover {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        /* Checklist */
+        .checklist {
+            margin-top: 20px;
+            max-width: 400px;
+        }
+
+        .checklist input[type="checkbox"] {
+            display: none;
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: left;
+            background: #ffe6e6;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            font-size: 15px;
+            position: relative;
+            padding-left: 40px;
+            transition: background 0.3s ease;
+        }
+
+        .checklist label::before {
+            content: "⬜";
+            position: absolute;
+            left: 12px;
+            font-size: 18px;
+        }
+
+        .checklist input:checked + label {
+            background: #d0f5d0;
+            color: #000;
+        }
+
+        .checklist input:checked + label::before {
+            content: "✅";
+        }
+        .keyboard-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        #keyboard {
+            position: absolute;
+            top: 0;
+            left: 110%; /* Positions it to the right of the button */
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .keyboard-key {
+            background: none !important;
+            color: black !important;
+            border: 3px solid #000;
+            padding: 8px;
+            margin: 4px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        /* Taula ASCII – No background */
+        #taulaascii td, #taulaascii th {
+            background: none !important;
+            color: black;
+            border: 1px solid #aaa;
+            padding: 4px 8px;
+        }
+
+        /* Progress bar with limited width */
+        #nivel {
+            width: 100%;
+            max-width: 400px;
+            height: 16px;
+            appearance: none;
+            margin-top: 10px;
+            border-radius: 8px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+        }
+
+        #nivel::-webkit-progress-value {
+            background: linear-gradient(to right, #ff4b4b, #ffae00, #00c853);
+        }
+        #nivel::-webkit-progress-bar {
+            background-color: #eee;
+        }
+        #nivel::-moz-progress-bar {
+            background: linear-gradient(to right, #ff4b4b, #ffae00, #00c853);
+        }
+
+        /* Language icons */
+        #Idioma img {
+            width: 25px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        /* Dropdown */
+        select {
+            margin-top: 10px;
+            padding: 6px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    
-    <img src="img/logo-centre.jpg" alt="Logo" style = "width: 150px;"/>
+    <img src="img/logo-centre.jpg" alt="Logo" style="width: 200px;"/>
     <form>
         <label id="username">Usuari o correu:</label><br>
         <input type="text" id="Username" name="username" required><br>
-         <script>
-                document.getElementById('Username').value = "z9999999";
-            </script>
-            <label id='password'>Contrasenya:</label><br>
-       <input type="password" id='Password' required>
-
-       
-<button type="button" class="toggle-password" onclick="showPassword(event)">
-    <img src="img/eye-password-hide-icon-512x512-iv45hct9.png" alt="" width="25">
-</button>
-    
+        <script>
+            document.getElementById('Username').value = "z9999999";
+        </script>
+        <label id='password'>Contrasenya:</label><br>
+        <input type="password" id='Password' required>
+        
+        <br><button type="button" class="toggle-Password" onclick="showPassword(event)">
+            <img src="img/eye-password-hide-icon-512x512-iv45hct9.png" alt="" width="30">
+        </button>
+        
         <button type="button" onclick="Keyboard();"><img src="img/keyboard.png" alt=""/></button>    
-         <button id="generatePassword" type="button" onclick="generateAndSetPassword();"> 
-        <img src="img/generate.png" alt="" width="25"></button>       
+        <button id="generatePassword" type="button" onclick="generateAndSetPassword();"> 
+            <img src="img/generate.png" alt="" width="30">
+        </button>       
     </form>
     
-    <button id="IniciarButton" onclick="Iniciar();">Iniciar sesión</button><br>
-  
- 
-  
- <br><input type="checkbox" id="minicar" disabled > Mínim 8 caràcters<br> 
-    <input type="checkbox" id="uppercase" disabled> Almenys una lletra majúscula<br>
-    <input type="checkbox" id="lowercase" disabled> Almenys una lletra minúscula<br>
-    <input type="checkbox" id="number" disabled> Almenys un número<br>
-    <input type="checkbox" id="special" disabled> Almenys un caràcter especial<br>
-
-    Dèbil - Regular - Bona - Forta<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<progress id="nivel" value="0" max ="100"></progress><br>
-    <div translate = "no">&nbsp;Weak - So-so - Great! - Strong</div>
+<button id="IniciarButton" type="button" onclick="Iniciar();">Iniciar sesión</button>
     
-  
-  <div id="Idioma" translate="no">
-  
-    <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=en&_x_tr_hl=es&_x_tr_pto=wapp" id="en">
-        <img src="img/gb.png" alt="English" /></a>
-  
-    <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp" id="es">
-        <img src="img/es.png" alt="Español" /></a>
-  
-    <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=fr&_x_tr_hl=es&_x_tr_pto=wapp" id="fr">
-        <img src="img/fr.png" alt="Français" /></a>
- 
-    <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=it&_x_tr_hl=es&_x_tr_pto=wapp" id="it">
-        <img src="img/it.png" alt="Italiano" />
+    <form class="checklist">
+        <input type="checkbox" id="minicar">
+        <label for="minicar">Mínim 8 caràcters</label>
+
+        <input type="checkbox" id="uppercase">
+        <label for="uppercase">Almenys una lletra majúscula</label>
+
+        <input type="checkbox" id="lowercase">
+        <label for="lowercase">Almenys una lletra minúscula</label>
+
+        <input type="checkbox" id="number">
+        <label for="number">Almenys un número</label>
+
+        <input type="checkbox" id="special">
+        <label for="special">Almenys un caràcter especial</label>
+    </form>
+    
+    Dèbil - Regular - Bona - Forta<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<progress id="nivel" value="0" max="100"></progress><br>
+    <div translate="no">&nbsp;Weak - So-so - Great! - Strong</div>
+    
+    <div id="Idioma" translate="no">
+        <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=en&_x_tr_hl=es&_x_tr_pto=wapp" id="en">
+            <img src="img/gb.png" alt="English" />
+        </a>
+        
+        <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp" id="es">
+            <img src="img/es.png" alt="Español" />
+        </a>
+        
+        <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=fr&_x_tr_hl=es&_x_tr_pto=wapp" id="fr">
+            <img src="img/fr.png" alt="Français" />
+        </a>
+        
+        <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=it&_x_tr_hl=es&_x_tr_pto=wapp" id="it">
+            <img src="img/it.png" alt="Italiano" />
+        </a>
+        
         <a href="https://dashing--daffodil--ad788f-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=de&_x_tr_hl=es&_x_tr_pto=wapp" id="de">
-        <img src="img/de.png" alt="aleman"/>   </a>
+            <img src="img/de.png" alt="aleman"/>
+        </a>
         
-        
-        <script src="js/SHA1_MD5.js" type="text/javascript"></script>
-        <script src="js/md5.min.js" type="text/javascript"></script>
-        <script src="js/alasql.js" type="text/javascript"></script>
-        <script src="js/sql.js" type="text/javascript"></script>
-        
-        <Select name ="Ididiomes " id ="idiomes"
-                onchange ="CanviarIdioma(this.value)" title ="Select">
-            <option value= "ca">ca</option>
-            <option value= "es">es</option>
-            <option value= "en">en</option>
-            <option value= "fr">fr</option>
+        <select name="Ididiomes" id="idiomes" onchange="CanviarIdioma(this.value)" title="Select">
+            <option value="ca">ca</option>
+            <option value="es">es</option>
+            <option value="en">en</option>
+            <option value="fr">fr</option>
         </select>
             
-        <br><button type="button" onclick="table();">Show taulaASCII </button><br>
-     
-
+        <br><button type="button" onclick="table();">TaulaASCII</button><br>
         
-        
-        
+       <!-- Change the button onclick handlers to use correct ID -->
+<button id="insertbutton" type="button" 
+        onclick="insert(document.getElementById('idiomes').value);">
+    <img src="img/insert.png" alt="">
+</button>
 
+<button id="updatebutton" type="button" 
+        onclick="update(document.getElementById('idiomes').value);">
+    <img src="img/update.png" alt="">
+</button>
+    </div>
 
+    <script type="text/javascript">
+        document.getElementById('diccionari').addEventListener('change', readSingleFile, false);
+        document.getElementById('patrons').addEventListener('change', readSingleFile, false);
+    </script>
 
-    
-  <script type="text/javascript">
-      
-      document.getElementById('diccionari').addEventListener('change',readSingleFile , false );
-      document.getElementById('patrons').addEventListener('change',readSingleFile , false );
-      </script>
-      </div>
- 
- 
-
-<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-        <script>
-          window.addEventListener("DOMContentLoaded", function() {
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
             window.AgentInitializer.init({
-              agentRenderURL: "https://eu.jotform.com/agent/0196a58c1a05789bab7820474a490b78f311",
-              rootId: "JotformAgent-0196a58c1a05789bab7820474a490b78f311",
-              formID: "0196a58c1a05789bab7820474a490b78f311",
-              queryParams: ["skipWelcome=1", "maximizable=1"],
-              domain: "https://eu.jotform.com",
-              isDraggable: false,
-              background: "linear-gradient(180deg, #B3D37B 0%, #B3D37B 100%)",
-              buttonBackgroundColor: "#3C4C1E",
-              buttonIconColor: "#FFF",
-              variant: false,
-              customizations: {
-                "greeting": "Yes",
-                "greetingMessage": "Hi! How can I assist you?",
-                "openByDefault": "No",
-                "pulse": "Yes",
-                "position": "right",
-                "autoOpenChatIn": "0"
-              },
-              isVoice: false,
+                agentRenderURL: "https://eu.jotform.com/agent/0196a58c1a05789bab7820474a490b78f311",
+                rootId: "JotformAgent-0196a58c1a05789bab7820474a490b78f311",
+                formID: "0196a58c1a05789bab7820474a490b78f311",
+                queryParams: ["skipWelcome=1", "maximizable=1"],
+                domain: "https://eu.jotform.com",
+                isDraggable: false,
+                background: "linear-gradient(180deg, #B3D37B 0%, #B3D37B 100%)",
+                buttonBackgroundColor: "#3C4C1E",
+                buttonIconColor: "#FFF",
+                variant: false,
+                customizations: {
+                    "greeting": "Yes",
+                    "greetingMessage": "Hi! How can I assist you?",
+                    "openByDefault": "No",
+                    "pulse": "Yes",
+                    "position": "right",
+                    "autoOpenChatIn": "0"
+                },
+                isVoice: false
             });
-          });
-        </script>
-
-
+        });
+    </script>
+</body>
 
 <a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-Password-list-top-100.txt"> Diccionari: </a>
         <input type="file" id="diccionari"/><br>
