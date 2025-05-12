@@ -444,7 +444,6 @@ function CanviarIdioma(IdIdioma) {
         [], function(diccionari) {SQL_Diccionari(IdIdioma, diccionari.pop());}
     ); 
     
-    
     // Recuperam de la base de dades els Patrons del IdIdioma
     // SELECT Pattern FROM TblPatrons WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "ca";
     alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
@@ -546,4 +545,4 @@ function CanviarIdioma(IdIdioma) {
     }
 
         
-  
+   
