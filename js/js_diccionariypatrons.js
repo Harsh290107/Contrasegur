@@ -334,7 +334,7 @@ function comprovanivelPassword(Password) {
 function desar() {
     result = confirm("Vols guardar l'usuari i contrasenya?");
     if (result === true) {
-        localStorage.setItem("Username", document.getElementById("Username").value);
+        localStorage.setItem("username", document.getElementById("Username").value);
         localStorage.setItem("Password", document.getElementById("Password").value);
         const mWindow = window.open("desar.html", "_blank", "width=460, height=600, left=0, top=0, \n\
                     location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
@@ -432,7 +432,7 @@ function CanviarIdioma(IdIdioma) {
     
     document.title = Idioma.Titol;
     document.getElementById("username").innerHTML = Idioma.Username;
-    document.getElementById("Password").innerHTML = Idioma.Password;
+     document.getElementById("password").innerHTML = Idioma.Password;
 }
 
  // Recuperam de la base de dades el Diccionari del IdIdioma
