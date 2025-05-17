@@ -391,22 +391,32 @@ function Print_Data(res) {
 var Diccionari = new Set(); 
 var SqlDiccionari = [];
 // Funció per carregar la base de dades ContraSegur.db
-function AlaWeb_SQLite(IdIdioma) {
-    window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
-    config = {
-        locateFile: filename => `/dist/${filename}`
-    };
-    // The `initSqlJs` function is globally provided by all of the main dist files if loaded in the browser.
-    // We must specify this locateFile function if we are loading a wasm file from anywhere other than the
-    // current html page's folder.
+ function AlaWeb_SQLite(IdIdioma) {  
+        window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
+        
+        config = {
+            locateFile: filename => `/dist/${filename}`
+        };
+        // The `initSqlJs` function is globally provided by all of the main dist files if loaded in the browser.
+        // We must specify this locateFile function if we are loading a wasm file from anywhere other than the 
+        // current html page's folder.
 
-    // Recuperam de la base de dades els TextosGUI per tots els Idiomes
-    // SELECT * FROM TblTextosGUI;
-    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
-            SELECT * FROM TblTextosGUI;',
-        [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
-    );
-}
+        // Recuperam de la base de dades els TextosGUI per tots els Idiomes
+        // SELECT * FROM TblTextosGUI;
+        alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
+                SELECT * FROM TblTextosGUI;',
+            // [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
+            [], function(idiomes) {
+                SQL_TextosGUI(IdIdioma, idiomes.pop());
+            }
+        ); 
+        alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
+                SELECT Password FROM TblDiccionari \n\
+                WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "' + IdIdioma + '";',
+            [], function(diccionari) {SQL_Diccionari(diccionari.pop());} // TBLDICCIONARI CHANGES copied directly from him
+        ); 
+    }
+    
 window.onload = function() {
     AlaWeb_SQLite('ca'); // Initialize with default language
 };
@@ -435,23 +445,7 @@ function CanviarIdioma(IdIdioma) {
      document.getElementById("password").innerHTML = Idioma.Password;
 }
 
- // Recuperam de la base de dades el Diccionari del IdIdioma
-    // SELECT Password FROM TblDiccionari WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "ca";
-    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
-            SELECT Password FROM TblDiccionari \n\
-            WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "' + IdIdioma + '";',
-    //    [], function(diccionari) {Print_Data(TblDiccionari = diccionari.pop());}
-        [], function(diccionari) {SQL_Diccionari(IdIdioma, diccionari.pop());}
-    ); 
-    
-    // Recuperam de la base de dades els Patrons del IdIdioma
-    // SELECT Pattern FROM TblPatrons WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "ca";
-    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
-            SELECT Pattern FROM TblPatrons \n\
-            WHERE IdIdioma IS NULL OR IdIdioma = "" OR IdIdioma = "' + IdIdioma + '";',
-    //    [], function(patrons) {Print_Data(TblPatrons = patrons.pop());}
-        [], function(patrons) {SQL_Patrons(IdIdioma, patrons.pop());}
-    );  
+  
 
 
 
@@ -545,4 +539,4 @@ function CanviarIdioma(IdIdioma) {
     }
 
         
-   
+  
